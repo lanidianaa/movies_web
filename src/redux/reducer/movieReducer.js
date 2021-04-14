@@ -1,5 +1,4 @@
 const INITIAL_STATE = {
-  movies: [],
   totalRes: 0,
   details: {},
   loading: false,
@@ -13,13 +12,6 @@ export const movieReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: true,
-      };
-    case "FETCH_MOVIES_SUCCESS":
-      return {
-        ...state,
-        loading: false,
-        movies: action.payload.Search,
-        totalRes: action.payload.totalResults,
       };
     case "FETCH_DETAIL_SUCCESS":
       return {
