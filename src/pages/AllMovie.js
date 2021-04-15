@@ -28,6 +28,11 @@ const AllMovie = () => {
   const [movie, setMovie] = useState([]);
   const [hasMore, setHasMore] = useState(false);
 
+  useEffect(() => {
+    showMovie(query, pageNumber);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageNumber]);
+
   const showMovie = (que, pages) => {
     setLoading(true);
     setError(false);
@@ -35,7 +40,7 @@ const AllMovie = () => {
     axios({
       method: "GET",
       url: api_url,
-      params: {s: que, page: pages},
+      params: {s: que ? que : "all", page: pages},
       cancelToken: new axios.CancelToken((c) => (cancel = c)),
     })
       .then((res) => {
@@ -71,7 +76,14 @@ const AllMovie = () => {
 
   return (
     <div className="container flex">
-      <div style={{display: "flex", paddingTop: "15px", alignItems: "center"}}>
+      <div
+        style={{
+          display: "flex",
+          paddingTop: "30px",
+          alignItems: "center",
+          position: "fixed",
+        }}
+      >
         <input type="text" placeholder="Search..." onChange={handleSearch} />
         <Button
           style={{
@@ -113,8 +125,8 @@ const AllMovie = () => {
           }
         })}
       </div>
-      <div>{loading && "Loading..."}</div>
-      <div>{error && "Error"}</div>
+      <div style={{paddingTop: "35px"}}>{loading && "Loading..."}</div>
+      <div style={{paddingTop: "35px"}}>{error && "Error"}</div>
     </div>
   );
 };

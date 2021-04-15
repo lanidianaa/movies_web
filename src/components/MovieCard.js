@@ -4,7 +4,6 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
   makeStyles,
   Typography,
 } from "@material-ui/core";
@@ -15,8 +14,8 @@ import PosterModal from "./PosterModal";
 const MovieCard = ({image, name, id, type, year}) => {
   const useStyles = makeStyles({
     root: {
-      maxWidth: 500,
-      minWidth: 500,
+      maxWidth: 400,
+      minWidth: 400,
     },
   });
 
@@ -50,7 +49,7 @@ const MovieCard = ({image, name, id, type, year}) => {
               src={image}
               alt={name}
               onClick={toggle}
-              style={{height: "200px"}}
+              style={{height: "200px", width: "135px"}}
             />
           </div>
           <CardContent
@@ -61,18 +60,20 @@ const MovieCard = ({image, name, id, type, year}) => {
             }}
           >
             <Typography gutterBottom variant="h5" component="h2">
-              {name} [{year}]
+              <p style={{textAlign: "right"}}>
+                [{year}] <br /> {name}
+              </p>
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               {type}
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions style={{display: "flex", paddingLeft: "400px"}}>
-          <Link to={`/movie-detail?id=${id}`}>
+        <CardActions style={{display: "flex", justifyContent: "flex-end"}}>
+          <Link to={`/movie-detail?id=${id}`} style={{textDecoration: "none"}}>
             <Button
-              size="normal"
-              style={{outline: 0, backgroundColor: "blue", color: "whitesmoke"}}
+              size="medium"
+              style={{backgroundColor: "#2a9df4", color: "whitesmoke"}}
             >
               Detail
             </Button>
